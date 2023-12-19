@@ -1,6 +1,6 @@
 import random
 
-def ia(plateau, signe):
+def ia_joue(plateau, signe):
     # Convertir le plateau en format numérique
     plateau_num = [[0 if case == "" else (1 if case == "X" else 2) for case in row] for row in plateau]
 

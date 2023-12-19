@@ -1,6 +1,6 @@
 import pygame  
 import pygame_menu  
-from ia import ia  # importe la fonction ia depuis le fichier ia.py
+from ia import ia_joue  # importe la fonction ia depuis le fichier ia.py
 
 # Initialisation de Pygame
 pygame.init() 
@@ -135,7 +135,7 @@ while True:
         # tour de l'IA
         if mode_contre_ia and joueur_actuel == "O" and jeu_en_cours:
             pygame.time.delay(2000)  # délai pour simuler la réflexion de l'IA
-            row, col = ia(plateau, joueur_actuel)
+            row, col = ia_joue(plateau, joueur_actuel)
             if row is not None and col is not None:
                 placer_symbole(row, col, joueur_actuel)
                 if verifier_victoire(joueur_actuel):
