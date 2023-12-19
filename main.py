@@ -122,6 +122,9 @@ while True:
                     row = y // espacement  # calcule la ligne cliquée
                     if verifier_case_libre(row, col):  
                         placer_symbole(row, col, joueur_actuel)  
+                        dessiner_symboles()  # dessine les symboles pour afficher le coup du joueur
+                        pygame.display.update()  # mettre à jour l'affichage
+                        pygame.time.delay(500)  # attendre 2 secondes avant de continuer au cas où la partie n'est pas terminée, cela simule la réflexion de l'ia. 
                         if verifier_victoire(joueur_actuel):  
                             gagnant = "Les croix ont gagné !" if joueur_actuel == "X" else "Les ronds ont gagné !"
                             afficher_message(gagnant)  
@@ -131,10 +134,10 @@ while True:
                             jeu_en_cours = False
                         changer_joueur()
                         break  # important pour sortir de la boucle après un coup
+                    
 
         # tour de l'IA
         if mode_contre_ia and joueur_actuel == "O" and jeu_en_cours:
-            pygame.time.delay(2000)  # délai pour simuler la réflexion de l'IA
             row, col = ia_joue(plateau, joueur_actuel)
             if row is not None and col is not None:
                 placer_symbole(row, col, joueur_actuel)
