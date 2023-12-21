@@ -11,9 +11,12 @@ screen = pygame.display.set_mode((longueur, largeur))  # crée la fenêtre du je
 pygame.display.set_caption("Tic Tac Toe")  # titre de la fenêtre
 white = (255, 255, 255)  
 black = (0, 0, 0)  
+red = (255, 20, 50)
+blue = (0, 200, 255)
+dark_grey = (70, 70, 70)
 taille_ligne = 7  
 espacement = 200  # définit l'espacement entre les lignes de la grille
-joueur_actuel = "X"  # définit le joueur actuel (commence par 'X')
+joueu_actuel = "X"  # définit le joueur actuel (commence par 'X')
 plateau = [["" for _ in range(3)] for _ in range(3)]  # crée un plateau de jeu 3x3 vide
 mode_contre_ia = False  # indique si le jeu est en mode joueur contre IA
 
@@ -21,8 +24,8 @@ mode_contre_ia = False  # indique si le jeu est en mode joueur contre IA
 def grille():
     # dessine les lignes verticales et horizontales de la grille
     for i in range(1, 3):
-        pygame.draw.line(screen, black, (0, i * espacement), (longueur, i * espacement), taille_ligne)
-        pygame.draw.line(screen, black, (i * espacement, 0), (i * espacement, largeur), taille_ligne)
+        pygame.draw.line(screen, white, (0, i * espacement), (longueur, i * espacement), taille_ligne)
+        pygame.draw.line(screen, white, (i * espacement, 0), (i * espacement, largeur), taille_ligne)
 
 def placer_symbole(row, col, joueur):
     plateau[row][col] = joueur  # place le symbole du joueur sur le plateau
@@ -33,10 +36,10 @@ def dessiner_symboles():
     for row in range(3):
         for col in range(3):
             if plateau[row][col] == "X":
-                pygame.draw.line(screen, black, (col * espacement + 50, row * espacement + 50), (col * espacement + 150, row * espacement + 150), taille_ligne)
-                pygame.draw.line(screen, black, (col * espacement + 150, row * espacement + 50), (col * espacement + 50, row * espacement + 150), taille_ligne)
+                pygame.draw.line(screen, red, (col * espacement + 50, row * espacement + 50), (col * espacement + 150, row * espacement + 150), taille_ligne)
+                pygame.draw.line(screen, red, (col * espacement + 150, row * espacement + 50), (col * espacement + 50, row * espacement + 150), taille_ligne)
             elif plateau[row][col] == "O":
-                pygame.draw.circle(screen, black, (col * espacement + 100, row * espacement + 100), 50, taille_ligne)
+                pygame.draw.circle(screen, blue, (col * espacement + 100, row * espacement + 100), 50, taille_ligne)
 
 # vérifie si le joueur actuel a gagné
 def verifier_victoire(joueur):
@@ -108,8 +111,8 @@ while True:
             exit()  
 
     if jeu_en_cours:
-        screen.fill(white)  # remplit l'écran de blanc
-        grille()  # dessine la grille du jeu
+        screen.fill(dark_grey)  
+        grille()  
         dessiner_symboles()  # dessine les symboles 'X' et 'O'
         pygame.display.update()  # met à jour l'affichage
 
@@ -124,7 +127,7 @@ while True:
                         placer_symbole(row, col, joueur_actuel)  
                         dessiner_symboles()  # dessine les symboles pour afficher le coup du joueur
                         pygame.display.update()  # mettre à jour l'affichage
-                        pygame.time.delay(500)  # attendre 2 secondes avant de continuer au cas où la partie n'est pas terminée, cela simule la réflexion de l'ia. 
+                        pygame.time.delay(500)  # attend une demie seconde avant de continuer au cas où la partie n'est pas terminée, cela simule la réflexion de l'ia. 
                         if verifier_victoire(joueur_actuel):  
                             gagnant = "Les croix ont gagné !" if joueur_actuel == "X" else "Les ronds ont gagné !"
                             afficher_message(gagnant)  
